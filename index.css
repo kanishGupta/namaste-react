@@ -1,0 +1,85 @@
+.header-class {
+    display: flex;
+    border: 1px solid black;
+    justify-content: space-between; /*to align divs along the border */
+}
+
+
+.img-class {
+    height: 120px;
+    width: 120px;
+    display: flex;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.header-list {
+    
+    padding:  0px 20px;
+}
+
+.header-list > ul{
+    list-style-type: none;  /*remove bullets */
+    margin: 5px;
+    display: flex;
+}
+
+.header-list > ul > li{
+    padding: 10px;
+    margin: 10px
+}
+
+.res-card {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(242, 235, 235);
+}
+
+.res-card:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.res-img {
+    width: 100%;
+    height: 200px;
+}
+
+.res-container {
+    display: flex; /*to spread up the things in horizontal manner*/
+    flex-wrap: wrap;   /*to stop the horizontal overflow    */ 
+}
+
+.btn-cls {
+    margin: 10px;
+}
+
+.shimmering-card {
+  width: 230px;
+  height: 400px;
+  background-color: #f2ebeb;
+  margin: 10px;
+}
+
+.shimmering-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* .login-btn {
+    padding: 2px 2px;
+} */
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.no-style-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+ 
+  

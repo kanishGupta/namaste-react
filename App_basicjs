@@ -1,0 +1,10 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//Once this code runs it will just return us an js object/react element
+const heading = React.createElement("h1", {}, "Hello React123456");
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+//now this statement will convert it to h1 tag and send to dom
+root.render(heading);
