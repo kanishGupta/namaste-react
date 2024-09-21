@@ -1,5 +1,5 @@
 import React from "react";
-
+//This Class based component is used to show how render and commit phase of siblings is combined.
 class UserClass extends React.Component {
   constructor(props) {
     super(props);

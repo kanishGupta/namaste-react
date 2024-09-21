@@ -1,22 +1,12 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ShimmeringCard from "./ShimmeringCard";
-import { REST_INFO_URL } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [restInfo, setRestInfo] = useState(null);
 
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const response = await fetch(REST_INFO_URL + resId);
-    const json = await response.json();
-    setRestInfo(json);
-  };
+  const restInfo = useRestaurantMenu(resId);
 
   if (restInfo === null) {
     return <ShimmeringCard></ShimmeringCard>;

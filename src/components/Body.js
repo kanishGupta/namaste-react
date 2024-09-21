@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import ShimmeringCard from "./ShimmeringCard";
 import { Link } from "react-router-dom";
+import useNetworkStatus from "../utils/useNetworkStatus";
 
 const Body = () => {
   const [restaurantDataList, setRestaurantDataList] = useState([]);
@@ -33,6 +34,14 @@ const Body = () => {
       );
     }
   };
+
+  const onlineStatus  = useNetworkStatus();
+
+  if(!onlineStatus){
+    return(
+      <h1>Hey user, your internet is down!! Please check your connection</h1>
+    );
+  }
 
   //conditional rendering
   if (filteredRestaurantDataList.length === 0) {
