@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
+import RestaurantCard, {withTopRatedLabelRestaurantCard} from "./RestaurantCard";
 import ShimmeringCard from "./ShimmeringCard";
 import { Link } from "react-router-dom";
 import useNetworkStatus from "../utils/useNetworkStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [restaurantDataList, setRestaurantDataList] = useState([]);
@@ -10,6 +11,10 @@ const Body = () => {
     []
   );
   const [inputText, setInputText] = useState("");
+
+  const TopRatedRestaurantCard = withTopRatedLabelRestaurantCard(RestaurantCard);
+
+  const {loggedInUser, setUserName} = useContext(UserContext);
 
   useEffect(() => {
     fetchRestaurantData();
@@ -23,7 +28,7 @@ const Body = () => {
 
     if (response.ok) {
       restaurantDataJson = await response.json();
-      // console.log(restaurantDataJson);
+      
       setfilteredRestaurantDataList(
         restaurantDataJson?.data?.cards[1]?.card?.card?.gridElements
           ?.infoWithStyle?.restaurants
@@ -49,9 +54,10 @@ const Body = () => {
   }
 
   return (
-    <div>
-      <div className="filter">
+    <div className="px-4 py-4">
+      <div  className="px-4 py-4 flex">
         <input
+          className = "border border-solid border-black"
           type="text"
           value={inputText}
           onChange={(e) => {
@@ -59,7 +65,8 @@ const Body = () => {
           }}
         ></input>
 
-        <button
+        <button 
+        className="mx-4 px-4 py-0 bg-green-400 rounded-lg"
           onClick={() => {
             setfilteredRestaurantDataList(
               restaurantDataList.filter((res) =>
@@ -72,7 +79,7 @@ const Body = () => {
         </button>
 
         <button
-          className="btn-cls"
+          className="mx-4 px-4 py-0 bg-gray-200 rounded-lg"
           onClick={() => {
             setfilteredRestaurantDataList(
               restaurantDataList.filter(
@@ -83,15 +90,26 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+
+        <input
+          className = "border border-solid border-black"
+          type="text"
+          value={loggedInUser }
+          placeholder="type username..."
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}>
+          </input>
+
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurantDataList.map((restaurant) => (
           <Link
             className="no-style-link"
             to={"/restaurant/" + restaurant.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard restaurantData={restaurant} />
+            {restaurant.info.avgRating>=4.6?<TopRatedRestaurantCard restaurantData={restaurant} />:<RestaurantCard restaurantData={restaurant} />}
           </Link>
         ))}
       </div>
